@@ -1,27 +1,39 @@
 
-
-o = [4,3,2,1]
-a = []
-d = []
-swp = 0
+#import time
 
 
-def hanoi(n, o, a, d):
-    print("n: ", n)
-    print("o: ", o)
+A = [4,3,2,1]
+B = []
+C = []
+
+def log(a,b,c,n):
     print("a: ", a)
-    print("d: ", d)
-    print("-------------")
-    if n == 1: 
-        if len(o)!=0:
-            d.append(o.pop())
+    print("b: ", b)
+    print("c: ", c)
+    print("n: ", n)
+    print("---------------")
+    #time.sleep(1)
+
+def Hanoi(a, b, c, n):
+    if n == 0:
+        return
+    elif n == 1:
+        log(a,b,c,n)
+        c.append(a.pop())
+    elif n == 2:
+        log(a,b,c,n)
+        b.append(a.pop())
+        log(a,b,c,n)
+        c.append(a.pop())
+        log(a,b,c,n)
+        c.append(b.pop())
     else:
-        hanoi(n-1, o, d, a)
-        if len(o)!=0:
-            d.append(o.pop())
-        hanoi(n-1, d, a,o)
-    
+        Hanoi(a, c, b, n-1)
+        log(a,b,c,n)
+        c.append(a.pop())
+        Hanoi(b, a, c,n-1)
 
-hanoi(2**len(o)-1, o, a, d)
+Hanoi(A, B, C, len(A))
 
+print("c:", C)
 
